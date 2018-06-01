@@ -63,6 +63,10 @@ public class ResponseService<T> implements Serializable{
 		return new ResponseService<T>(ResponseCode.ERROR.getCode(), msg);
 	}
 	
+	public static <T> ResponseService<T> createErrorResposeCodeMessage(Integer code, String msg) {
+		return new ResponseService<T>(code, msg);
+	}
+	
 	public static <T> ResponseService<T> createErrorRespose(T data) {
 		return new ResponseService<T>(ResponseCode.ERROR.getCode(), data);
 	}

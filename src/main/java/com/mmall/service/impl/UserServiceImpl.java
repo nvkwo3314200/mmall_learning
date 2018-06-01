@@ -179,4 +179,14 @@ public class UserServiceImpl implements IUserService {
 		return ResponseService.createErrorResposeMessage("更新失败");
 	}
 
+	@Override
+	public ResponseService<String> checkUserPower(User user) {
+		if(user != null) {
+			if(Constant.Role.ADMIN == user.getRole()) {
+				return ResponseService.createSuccessRespose();
+			}
+		}
+		return ResponseService.createErrorRespose();
+	}
+	
 }

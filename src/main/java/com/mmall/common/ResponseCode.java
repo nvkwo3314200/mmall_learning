@@ -5,7 +5,7 @@ public enum ResponseCode {
 	ERROR(1, "ERROR"),
 	ARGUMENT_ILLEGAL(2, "ARGUMENT_ILLEGAL"),
 	WRONG_PASSWORD(3, "WRONG_PASSWORD"),
-	USERNAME_NOT_EXIST(10, "USERNAME_NOT_EXIST");
+	NON_LOGIN(10, "NON_LOGIN");
 	
 	private int code;
 	private String desc;
