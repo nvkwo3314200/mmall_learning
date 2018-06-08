@@ -33,7 +33,7 @@ public class UserController {
 	@RequestMapping(value = "logout.do", method = RequestMethod.POST)
 	public ResponseService<String> logout(HttpSession session) {
 		session.removeAttribute(Constant.CURRENT_USER);
-		return ResponseService.createSuccessResposeMessage("退出成功");
+		return ResponseService.createSuccessResponseMessage("退出成功");
 	}
 
 	@RequestMapping(value = "register.do", method = RequestMethod.POST)
@@ -51,9 +51,9 @@ public class UserController {
 	public ResponseService<User> getUserInfo(HttpSession session) {
 		User user = (User) session.getAttribute(Constant.CURRENT_USER);
 		if (user == null) {
-			return ResponseService.createErrorResposeMessage("用户未登录,无法获取当前用户信息");
+			return ResponseService.createErrorResponseMessage("用户未登录,无法获取当前用户信息");
 		} else {
-			return ResponseService.createSuccessRespose(user);
+			return ResponseService.createSuccessResponse(user);
 		}
 	}
 
@@ -75,18 +75,18 @@ public class UserController {
 	@RequestMapping(value = "reset_password.do", method = RequestMethod.POST)
 	public ResponseService<String> resetPassword(String passwordOld, String passwordNew, HttpSession session) {
 		User user = (User) session.getAttribute(Constant.CURRENT_USER);
-		if(user == null) return ResponseService.createErrorResposeMessage("请重新登入");
+		if(user == null) return ResponseService.createErrorResponseMessage("请重新登入");
 		return iUserService.resetPassword(passwordOld, passwordNew, user);
 	}
 	
 	@RequestMapping(value = "update_information.do", method = RequestMethod.POST)
 	public ResponseService<User> updateInformation(User user, HttpSession session) {
 		User sessionUser = (User) session.getAttribute(Constant.CURRENT_USER);
-		if(sessionUser == null) return ResponseService.createErrorResposeMessage("请重新登入");
+		if(sessionUser == null) return ResponseService.createErrorResponseMessage("请重新登入");
 		ResponseService<User> response = iUserService.updateInformation(user, sessionUser);
 		if(response.isSuccess()) {
 			session.setAttribute(Constant.CURRENT_USER, response.getData());
-			return ResponseService.createSuccessResposeMessage("更新成功");
+			return ResponseService.createSuccessResponseMessage("更新成功");
 		}
 		return response;	
 	}
@@ -94,8 +94,8 @@ public class UserController {
 	@RequestMapping(value = "get_information.do", method = RequestMethod.POST)
 	public ResponseService<User> getInformation(HttpSession session) {
 		User user = (User) session.getAttribute(Constant.CURRENT_USER);
-		if(user == null) return ResponseService.createErrorResposeMessage("用户未登录,无法获取当前用户信息,status=10,强制登录");
-		return ResponseService.createSuccessRespose(user);
+		if(user == null) return ResponseService.createErrorResponseMessage("用户未登录,无法获取当前用户信息,status=10,强制登录");
+		return ResponseService.createSuccessResponse(user);
 	}
 
 }

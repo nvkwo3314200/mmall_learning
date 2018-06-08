@@ -106,4 +106,64 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="getCartByUserId" resultMap="BaseResultMap" parameterType="int">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from mmall_cart
+  	where 
+  	user_id = #{userId}
+  </select>
+  
+  <select id="countNonCheckProductByUserId" parameterType="int" resultType="int">
+  	select count(1) from mmall_cart
+  	where user_id = #{userId}
+  	and checked = 0
+  </select>
+  
+  <select id="selectByProductIdAndUserId" resultMap="BaseResultMap" parameterType="map">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from mmall_cart
+  	where user_id = #{userId}
+  	and product_id = #{productId}
+  </select>
+  
+  <delete id="deleteByProductIdsAndUserId" parameterType="map">
+  	delete from mmall_cart
+  	where user_id = #{userId}
+  	and product_id in
+  	<foreach collection="productIdSet" item="item" open="(" separator="," close=")">
+  		#{item}
+  	</foreach>
+  </delete>
+  
+  <update id="updateCartSelected" parameterType="com.mmall.pojo.Cart">
+  	update mmall_cart
+  	set checked = #{checked}
+  	where user_id = #{userId}
+  	<if test="null != productId">
+  		and product_id = #{productId}
+  	</if>
+  </update>
+  
+  <select id="getCartProductCountByUserId" resultType="int">
+  	select NULLIF(sum(quantity), 0) from mmall_cart
+  	where user_id = #{userId}
+  </select>
+  
+  <update id="updateQuantity" parameterType="com.mmall.pojo.Cart">
+  	update mmall_cart
+  	set quantity = #{quantity}
+  	where user_id = #{userId}
+  	and product_id = #{productId}
+  </update>
+  
+   <select id="getCheckedCartByUserId" resultMap="BaseResultMap" parameterType="int">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from mmall_cart
+  	where user_id = #{userId}
+  	and checked = 1
+  </select>
 </mapper>

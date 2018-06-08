@@ -1,5 +1,7 @@
 package com.mmall.service;
 
+import javax.servlet.http.HttpSession;
+
 import com.mmall.common.ResponseService;
 import com.mmall.pojo.User;
 
@@ -22,4 +24,8 @@ public interface IUserService {
 	public ResponseService<User> updateInformation(User user, User sessionUser);
 
 	public ResponseService<String> checkUserPower(User user); 
+	
+	public ResponseService<String> checkUserPower(HttpSession session);
+
+	ResponseService<User> checkUserLogin(HttpSession session);
 }

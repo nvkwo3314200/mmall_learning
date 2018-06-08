@@ -245,6 +245,14 @@
 			<artifactId>jedis</artifactId>
 			<version>2.9.0</version>
 		</dependency>
+
+		<!-- alipay -->	
+		<dependency>
+		    <groupId>com.alipay.sdk</groupId>
+		    <artifactId>alipay-sdk-java</artifactId>
+		    <version>3.0.1</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

@@ -19,6 +19,7 @@
         <property name="locations">
             <list>
                 <value>classpath:datasource.properties</value>
+                <value>classpath:mmall.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="utf-8"/>

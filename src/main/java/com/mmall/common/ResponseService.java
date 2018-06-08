@@ -39,40 +39,44 @@ public class ResponseService<T> implements Serializable{
 		return this.status == ResponseCode.SUCCESS.getCode();
 	}
 	
-	public static <T> ResponseService<T> createSuccessRespose() {
+	public static <T> ResponseService<T> createSuccessResponse() {
 		return new ResponseService<T>(ResponseCode.SUCCESS.getCode());
 	}
 	
-	public static <T> ResponseService<T> createSuccessResposeMessage(String msg) {
+	public static <T> ResponseService<T> createSuccessResponseMessage(String msg) {
 		return new ResponseService<T>(ResponseCode.SUCCESS.getCode(), msg);
 	}
 	//此方法与上面的方法不能重名，如果重名，当泛型为String时,是无法正确定位到该方法的
-	public static <T> ResponseService<T> createSuccessRespose(T data) {
+	public static <T> ResponseService<T> createSuccessResponse(T data) {
 		return new ResponseService<T>(ResponseCode.SUCCESS.getCode(), data);
 	}
 	
-	public static <T> ResponseService<T> createSuccessRespose(String msg, T data) {
+	public static <T> ResponseService<T> createSuccessResponse(String msg, T data) {
 		return new ResponseService<T>(ResponseCode.SUCCESS.getCode(), msg, data);
 	}
 	
-	public static <T> ResponseService<T> createErrorRespose() {
+	public static <T> ResponseService<T> createErrorResponse() {
 		return new ResponseService<T>(ResponseCode.ERROR.getCode());
 	}
 	
-	public static <T> ResponseService<T> createErrorResposeMessage(String msg) {
+	public static <T> ResponseService<T> createErrorResponseMessage(String msg) {
 		return new ResponseService<T>(ResponseCode.ERROR.getCode(), msg);
 	}
 	
-	public static <T> ResponseService<T> createErrorResposeCodeMessage(Integer code, String msg) {
+	public static <T> ResponseService<T> createErrorResponseCodeMessage(Integer code, String msg) {
 		return new ResponseService<T>(code, msg);
 	}
 	
-	public static <T> ResponseService<T> createErrorRespose(T data) {
+	public static <T> ResponseService<T> createErrorResponse(T data) {
 		return new ResponseService<T>(ResponseCode.ERROR.getCode(), data);
 	}
 	
-	public static <T> ResponseService<T> createErrorRespose(String msg, T data) {
+	public static <T> ResponseService<T> createErrorResponse(String msg, T data) {
 		return new ResponseService<T>(ResponseCode.ERROR.getCode(), msg, data);
+	}
+	
+	public static <T> ResponseService<T> createResponse(Integer code, String msg, T data) {
+		return new ResponseService<T>(code, msg, data);
 	}
 	
 	public int getStatus() {

@@ -1,5 +1,7 @@
 package com.mmall.dao;
 
+import java.util.List;
+
 import com.mmall.pojo.Shipping;
 
 public interface ShippingMapper {
@@ -14,4 +16,6 @@ public interface ShippingMapper {
     int updateByPrimaryKeySelective(Shipping record);
 
     int updateByPrimaryKey(Shipping record);
+
+	List<Shipping> selectByUserId(Integer userId);
 }

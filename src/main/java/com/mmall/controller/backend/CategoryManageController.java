@@ -38,7 +38,7 @@ public class CategoryManageController {
 			return iCategoryService.addCategory(parentId, categoryName);
 		}
 		
-		return ResponseService.createErrorResposeCodeMessage(ResponseCode.NON_LOGIN.getCode(), "用户未登录,请登录");
+		return ResponseService.createErrorResponseCodeMessage(ResponseCode.NON_LOGIN.getCode(), "用户未登录,请登录");
 	}
 	
 	@RequestMapping(value="set_category_name.do", method=RequestMethod.POST)
@@ -48,7 +48,7 @@ public class CategoryManageController {
 		if(response.isSuccess()) {
 			return iCategoryService.setCategoryName(categoryId, categoryName);
 		}
-		return ResponseService.createErrorResposeCodeMessage(ResponseCode.NON_LOGIN.getCode(), "用户未登录,请登录");
+		return ResponseService.createErrorResponseCodeMessage(ResponseCode.NON_LOGIN.getCode(), "用户未登录,请登录");
 	}
 	
 	@RequestMapping(value="get_category.do", method=RequestMethod.POST)
@@ -58,16 +58,16 @@ public class CategoryManageController {
 		if(response.isSuccess()) {
 			return iCategoryService.getChildrenParallelCategory(parentId);
 		}
-		return ResponseService.createErrorResposeCodeMessage(ResponseCode.NON_LOGIN.getCode(), "用户未登录,请登录");
+		return ResponseService.createErrorResponseCodeMessage(ResponseCode.NON_LOGIN.getCode(), "用户未登录,请登录");
 	}
 	
 	@RequestMapping(value="get_deep_category.do", method=RequestMethod.POST)
-	public ResponseService<List<Category>> getChildrenCategory(HttpSession session, @RequestParam(value="parentId", defaultValue="0")Integer parentId) {
+	public ResponseService<List<Integer>> getChildrenCategoryIds(HttpSession session, @RequestParam(value="parentId", defaultValue="0")Integer parentId) {
 		User user = (User) session.getAttribute(Constant.CURRENT_USER);
 		ResponseService<String> response = iUserService.checkUserPower(user);
 		if(response.isSuccess()) {
-			return iCategoryService.getChildrenCategory(parentId);
+			return iCategoryService.getChildrenCategoryIds(parentId);
 		}
-		return ResponseService.createErrorResposeCodeMessage(ResponseCode.NON_LOGIN.getCode(), "用户未登录,请登录");
+		return ResponseService.createErrorResponseCodeMessage(ResponseCode.NON_LOGIN.getCode(), "用户未登录,请登录");
 	}
 }

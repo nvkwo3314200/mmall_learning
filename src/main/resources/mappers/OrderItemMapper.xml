@@ -153,4 +153,24 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="getOrderItemByOrderNoAndUserId" parameterType="map" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from mmall_order_item
+  	where user_id = #{userId,jdbcType=INTEGER}
+  	and order_no = #{orderNo,jdbcType=BIGINT}
+  </select>
+  
+  <insert id="batchInsert">
+  	insert into mmall_order_item ( user_id, order_no, 
+      product_id, product_name, product_image, 
+      current_unit_price, quantity, total_price, 
+      create_time, update_time)
+    values 
+    <foreach collection="orderItemList" item="item" index="index" separator=",">
+    	(#{item.userId}, #{item.orderNo},#{item.productId},#{item.productName},#{item.productImage},
+    	#{item.currentUnitPrice}, #{item.quantity}, #{item.totalPrice}, now(), now()))
+    </foreach>
+  </insert>
 </mapper>

@@ -43,7 +43,7 @@
       #{receiverZip,jdbcType=VARCHAR}, now(), now()
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.mmall.pojo.Shipping" >
+  <insert id="insertSelective" parameterType="com.mmall.pojo.Shipping" useGeneratedKeys="true" keyProperty="id" >
     insert into mmall_shipping
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -166,4 +166,10 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="int">
+  	select 
+  	<include refid="Base_Column_List"/>
+  	from mmall_shipping
+  	where user_id = #{userId}
+  </select>
 </mapper>
